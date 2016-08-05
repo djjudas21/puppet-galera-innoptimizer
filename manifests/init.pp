@@ -43,6 +43,39 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class galera_innoptimizer {
+  include ::python
+  include ::epel
+
+  # Install Python dependencies
+  package { [
+    'python2-configargparse',
+    'python-colorama',
+    'MySQL-python',
+  ]:
+    ensure  => installed,
+    require => Class['python', 'epel'],
+  }
+
+  # Create dir to cloned repo
+  file { '/opt/galera_innoptimizer':
+    ensure => directory,
+  }
+
+  # vcsrepo check out app
+  vcsrepo { '/opt/galera_innoptimizer':
+    ensure   => present,
+    provider => git,
+    source   => 'https://github.com/deimosfr/galera_innoptimizer.git',
+    revision => '0.3.0',
+    require  => File['/opt/galera_innoptimizer'],
+  }
+
+  # Symlink to bindir in path
+  file { '/usr/local/bin/ginnoptimizer':
+    ensure  => link,
+    target  => '/opt/galera_innoptimizer/ginnoptimizer.py',
+    require => Vcsrepo['/opt/galera_innoptimizer'],
+  }
 
 
 }
