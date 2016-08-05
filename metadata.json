@@ -1,0 +1,14 @@
+{
+  "name": "jgazeley-galera_innoptimizer",
+  "version": "0.1.0",
+  "author": "jgazeley",
+  "summary": "Puppet module to install Galera Innoptimizer",
+  "license": "Apache-2.0",
+  "source": "https://github.com/djjudas21/puppet-galera-innoptimizer",
+  "project_page": "https://github.com/djjudas21/puppet-galera-innoptimizer",
+  "issues_url": "https://github.com/djjudas21/puppet-galera-innoptimizer/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
