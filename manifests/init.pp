@@ -1,7 +1,7 @@
-# Class: puppet_galera_innoptimizer
+# Class: galera_innoptimizer
 # ===========================
 #
-# Full description of class puppet_galera_innoptimizer here.
+# Full description of class galera_innoptimizer here.
 #
 # Parameters
 # ----------
@@ -28,7 +28,7 @@
 # --------
 #
 # @example
-#    class { 'puppet_galera_innoptimizer':
+#    class { 'galera_innoptimizer':
 #      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
 #    }
 #
@@ -42,7 +42,7 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class puppet_galera_innoptimizer {
+class galera_innoptimizer {
 
 
 }
