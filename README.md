@@ -3,77 +3,59 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with galera_innoptimizer](#setup)
-    * [What galera_innoptimizer affects](#what-galera_innoptimizer-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with galera_innoptimizer](#beginning-with-galera_innoptimizer)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+2. [Usage - Configuration options and additional functionality](#usage)
+3. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+4. [Limitations - OS compatibility, etc.](#limitations)
+5. [Development - Guide for contributing to the module](#development)
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
-
-## Module Description
-
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
-
-## Setup
-
-### What galera_innoptimizer affects
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-### Beginning with galera_innoptimizer
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+This is a Puppet module to install [Galera Innoptimizer](https://github.com/deimosfr/galera_innoptimizer)
+which is a tool to optimize InnoDB tables in a MariaDB/Galera cluster without
+causing locking problems.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+The simplest use case is to accept all defaults:
+
+```puppet
+include ::galera_innoptimizer
+```
+
+There are some parameters that can be set:
+
+```puppet
+class { '::galera_innoptimizer':
+  version    => undef,
+  installdir => '/opt/galera_innoptimizer',
+  bindir     => '/usr/local/bin',
+}
+```
+
+### `version`
+
+Version of galera_innoptimizer to check out from the git repo. Usually this would be a
+[tagged release](https://github.com/deimosfr/galera_innoptimizer/releases) but it could
+also be a git commit ID. Leave this blank to install git HEAD.
+
+### `installdir`
+
+Specify the directory where the git repo should be checked out. Default: `/opt/galera_innoptimizer`
+
+### `bindir`
+
+Specify the bin directory where the script itself should be symlinked. Default: `/usr/local/bin`
+
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
-
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+The first release of `jgazeley/galera_innoptimizer` supports only Red Hat and
+related EL distros. Support for Debian family is on the roadmap.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+Pull requests welcome.
 
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+## Release Notes
