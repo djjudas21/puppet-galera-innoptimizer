@@ -42,7 +42,11 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class galera_innoptimizer {
+class galera_innoptimizer (
+  $version = undef,
+  $installdir = '/opt/galera_innoptimizer',
+  $bindir = '/usr/local/bin',
+) {
   include ::python
   include ::epel
 
@@ -57,25 +61,23 @@ class galera_innoptimizer {
   }
 
   # Create dir to cloned repo
-  file { '/opt/galera_innoptimizer':
+  file { $installdir:
     ensure => directory,
   }
 
   # vcsrepo check out app
-  vcsrepo { '/opt/galera_innoptimizer':
+  vcsrepo { $installdir:
     ensure   => present,
     provider => git,
     source   => 'https://github.com/deimosfr/galera_innoptimizer.git',
-    revision => '0.3.0',
-    require  => File['/opt/galera_innoptimizer'],
+    revision => $version,
+    require  => File[$installdir],
   }
 
   # Symlink to bindir in path
-  file { '/usr/local/bin/ginnoptimizer':
+  file { "${bindir}/ginnoptimizer":
     ensure  => link,
-    target  => '/opt/galera_innoptimizer/ginnoptimizer.py',
-    require => Vcsrepo['/opt/galera_innoptimizer'],
+    target  => "${installdir}/ginnoptimizer.py",
+    require => Vcsrepo[$installdir],
   }
-
-
 }
