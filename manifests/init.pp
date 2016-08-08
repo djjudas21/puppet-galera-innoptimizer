@@ -7,6 +7,10 @@ class galera_innoptimizer (
   include ::python
   include ::epel
 
+  # Validate paths
+  validate_absolute_path($installdir)
+  validate_absolute_path($bindir)
+
   # Install Python dependencies
   package { [
     'python2-configargparse',
