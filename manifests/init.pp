@@ -5,21 +5,11 @@ class galera_innoptimizer (
   $bindir = '/usr/local/bin',
 ) {
   include ::python
-  include ::epel
+  include ::galera_innoptimizer::params
 
   # Validate paths
   validate_absolute_path($installdir)
   validate_absolute_path($bindir)
-
-  # Install Python dependencies
-  package { [
-    'python2-configargparse',
-    'python-colorama',
-    'MySQL-python',
-  ]:
-    ensure  => installed,
-    require => Class['python', 'epel'],
-  }
 
   # Create dir to cloned repo
   file { $installdir:
@@ -32,7 +22,10 @@ class galera_innoptimizer (
     provider => git,
     source   => 'https://github.com/deimosfr/galera_innoptimizer.git',
     revision => $version,
-    require  => File[$installdir],
+    require  => [
+      File[$installdir],
+      Class['::galera_innoptimizer::params'],
+    ],
   }
 
   # Symlink to bindir in path

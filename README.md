@@ -5,7 +5,6 @@
 1. [Overview](#overview)
 2. [Usage - Configuration options and additional functionality](#usage)
 3. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-4. [Limitations - OS compatibility, etc.](#limitations)
 5. [Development - Guide for contributing to the module](#development)
 
 ## Overview
@@ -46,16 +45,11 @@ Specify the directory where the git repo should be checked out. Default: `/opt/g
 
 Specify the bin directory where the script itself should be symlinked. Default: `/usr/local/bin`
 
-
 ## Reference
-
-## Limitations
-
-The first release of `jgazeley/galera_innoptimizer` supports only Red Hat and
-related EL distros. Support for Debian family is on the roadmap.
 
 ## Development
 
-Pull requests welcome.
+Pull requests to fix bugs and add new features are welcome. Please also let me know if you've tested
+on an unsupported OS, so I can add it to the compatibility list.
 
 ## Release Notes
